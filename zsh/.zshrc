@@ -78,6 +78,7 @@ autoload -Uz compinit && compinit
 # ──────────────────────────────
 alias bat='bat --color=always --theme=base16 --style=plain'
 alias c=clear
+alias cd=z
 alias fzf="command fzf --preview '
 if [ -d {} ]; then
 eza -l --color=always {} || ls -la {}
@@ -93,6 +94,7 @@ alias lf=~/.config/lf/lfrun
 alias paru='paru --skipreview'
 alias pk=pkill
 alias swaybar='waybar -c ~/.config/waybar/sway/config.jsonc'
+alias spot=spotify_player
 alias hyprbar='waybar -c ~/.config/waybar/hyprland/config.jsonc'
 alias vim=nvim
 alias yz=yazi
