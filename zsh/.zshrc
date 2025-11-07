@@ -1,5 +1,3 @@
-export ENV_PATH="/Users/amstrdm/Desktop/coding/thesis.ai/config/config.env"
-export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 # ──────────────────────────────
 # Auto-start
@@ -50,7 +48,22 @@ source "${ZINIT_HOME}/zinit.zsh"
 # Snippets (Zinit)
 # ──────────────────────────────
 zinit snippet OMZP::git
+
+# Load sudo, but use 'atload' to modify its bindings *after* it loads
+zinit ice atload"
+    # UNBIND the default EscEsc from the sudo plugin
+    # We use '\e\e' as that's what the plugin itself uses
+    bindkey -r -M emacs '\e\e'
+    bindkey -r -M vicmd '\e\e'
+    bindkey -r -M viins '\e\e'
+
+    # BIND the sudo command to Ctrl-N
+    bindkey -M emacs '^N' sudo-command-line
+    bindkey -M vicmd '^N' sudo-command-line
+    bindkey -M viins '^N' sudo-command-line
+"
 zinit snippet OMZP::sudo
+
 zinit snippet OMZP::archlinux
 zinit snippet OMZP::command-not-found
 
@@ -137,6 +150,7 @@ bindkey "\e[1;3C" forward-word
 bindkey "\eb" backward-word
 bindkey "\ef" forward-word
 
-export PATH=$PATH:/Users/amstrdm/.spicetify
-
-PATH=~/.console-ninja/.bin:$PATH
+# Load local-only, private configuration
+if [[ -f ~/.zshrc.local ]]; then
+  source ~/.zshrc.local
+fi
