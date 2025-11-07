@@ -1,0 +1,11 @@
+{
+  "extras": [
+    "lazyvim.plugins.extras.coding.mini-comment",
+    "lazyvim.plugins.extras.coding.mini-surround"
+  ],
+  "install_version": 8,
+  "news": {
+    "NEWS.md": "11866"
+  },
+  "version": 8
+}

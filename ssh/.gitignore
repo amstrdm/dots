@@ -1,0 +1,6 @@
+# Ignore all private keys (id_*)
+id_*
+
+# Ignore generated host files
+known_hosts
+known_hosts.old
