@@ -1,0 +1,183 @@
+"$schema" = "https://yazi-rs.github.io/schemas/theme.json"
+
+# vim:fileencoding=utf-8:foldmethod=marker
+
+# : Flavor {{{
+
+[flavor]
+dark = ""
+light = ""
+
+# : }}}
+
+
+# : Manager (File List) {{{
+
+[mgr]
+# CUSTOM: CWD text style is now your aqua color #c5c5c5
+cwd = { fg = "#c5c5c5", bold = true }
+
+# Hovered file style. Background set to your dark gray #282a2c.
+hovered = { bg = "#282a2c", bold = true }
+preview_hovered = { bg = "#282a2c", underline = true }
+
+# Find
+find_keyword = { fg = "black", bg = "#c5c5c5", bold = true, italic = true, underline = true }
+find_position = { fg = "magenta", bg = "reset", bold = true, italic = true }
+
+# Symlink is kept default, but can be changed with fg="#c5c5c5"
+symlink_target = { italic = true }
+
+# Marker colors use your hex values: aqua and a darker yellow/orange (#DCA054)
+marker_copied = { fg = "#c5c5c5", bg = "black" }
+marker_cut = { fg = "lightred", bg = "lightred" }
+marker_marked = { fg = "#DCA054", bg = "black", bold = true }
+marker_selected = { fg = "#DCA054", bg = "black" }
+
+# Count (Kept default for contrast)
+count_copied = { fg = "white", bg = "green" }
+count_cut = { fg = "white", bg = "red" }
+count_selected = { fg = "white", bg = "yellow" }
+
+# Border style is set to your aqua color #c5c5c5
+border_symbol = "│"
+border_style = { fg = "#c5c5c5" }
+
+# Highlighting
+syntect_theme = ""
+
+# : }}}
+
+
+# : Tabs {{{
+
+[tabs]
+# Active tab uses your aqua color #c5c5c5
+active = { fg = "#c5c5c5", bg = "black", bold = true }
+# Inactive tab uses darkgray keyword or a specific hex like #6d8086
+inactive = { fg = "darkgray", bg = "black" }
+
+# Separator (Kept default)
+sep_inner = { open = "", close = "" }
+sep_outer = { open = "", close = "" }
+
+# : }}}
+
+
+# : Mode {{{
+
+# Normal mode main style uses your aqua color #c5c5c5 for the background
+[mode]
+normal_main = { bg = "#c5c5c5", fg = "black", bold = true }
+normal_alt = { fg = "#c5c5c5", bg = "black" }
+
+# Select mode (Kept default red for contrast)
+select_main = { bg = "red", bold = true }
+select_alt = { fg = "red", bg = "gray" }
+
+# Unset mode (Kept default red for contrast)
+unset_main = { bg = "red", bold = true }
+unset_alt = { fg = "red", bg = "gray" }
+
+# : }}}
+
+
+# : Status bar {{{
+
+[status]
+# Overall status bar uses your dark gray #282a2c
+overall = { bg = "#282a2c", fg = "#ffffff" }
+sep_left = { open = "", close = "" }
+sep_right = { open = "", close = "" }
+
+# Permissions - type and exec use your aqua #c5c5c5
+perm_sep = { fg = "darkgray" }
+perm_type = { fg = "#c5c5c5" }
+perm_read = { fg = "yellow" }
+perm_write = { fg = "red" }
+perm_exec = { fg = "#c5c5c5" }
+
+# Progress bar uses your aqua color #c5c5c5
+progress_label = { bold = true }
+progress_normal = { fg = "black", bg = "#c5c5c5" }
+progress_error = { fg = "white", bg = "red" }
+
+# : }}}
+
+
+# The rest of the configuration is left as default to inherit proper colors/icons.
+
+[which]
+cols = 3
+mask = { bg = "black" }
+cand = { fg = "lightcyan" }
+rest = { fg = "darkgray" }
+desc = { fg = "lightmagenta" }
+separator = "  "
+separator_style = { fg = "darkgray" }
+
+[confirm]
+border = { fg = "blue" }
+title = { fg = "blue" }
+content = {}
+list = {}
+btn_yes = { reversed = true }
+btn_no = {}
+btn_labels = [
+  "  [Y]es  ", # <-- FIXED
+  "  (N)o  ",  # <-- FIXED
+]
+
+[spot]
+border = { fg = "blue" }
+title = { fg = "blue" }
+
+tbl_col = { fg = "blue" }
+tbl_cell = { fg = "yellow", reversed = true }
+
+[notify]
+title_info = { fg = "green" }
+title_warn = { fg = "yellow" }
+title_error = { fg = "red" }
+
+icon_info = ""
+icon_warn = ""
+icon_error = ""
+
+[pick]
+border = { fg = "blue" }
+active = { fg = "magenta", bold = true }
+inactive = {}
+
+[input]
+border = { fg = "blue" }
+title = {}
+value = {}
+selected = { reversed = true }
+
+[cmp]
+border = { fg = "blue" }
+active = { reversed = true }
+inactive = {}
+
+icon_file = ""
+icon_folder = ""
+icon_command = ""
+
+[tasks]
+border = { fg = "blue" }
+title = {}
+hovered = { fg = "magenta", underline = true }
+
+[help]
+on = { fg = "cyan" }
+run = { fg = "magenta" }
+desc = {}
+hovered = { reversed = true, bold = true }
+footer = { fg = "black", bg = "white" }
+
+[filetype]
+# ... Add filetype-specific rules here ...
+
+[icon]
+# ... Add icon rules here ...
