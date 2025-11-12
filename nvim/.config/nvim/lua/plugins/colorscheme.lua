@@ -1,7 +1,6 @@
 return {
   {
-    dir = "~/.config/nvim/lua/custom/dutchpro/",
-    name = "dutchpro.nvim",
+    "amstrdm/dutchpro",
   },
 
   {
