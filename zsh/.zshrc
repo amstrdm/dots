@@ -112,6 +112,7 @@ alias hyprbar='waybar -c ~/.config/waybar/hyprland/config.jsonc'
 alias vim=nvim
 alias yz=yazi
 
+source ~/.zsh_custom/safe_rm.zsh
 # ──────────────────────────────
 # Package aliases
 # ──────────────────────────────
