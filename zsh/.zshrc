@@ -87,6 +87,23 @@ autoload -Uz compinit && compinit
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # ──────────────────────────────
+# Global Gitignore setup
+# ──────────────────────────────
+GITIGNORE_GLOBAL="$HOME/.gitignore_global"
+
+if [[ ! -f "$GITIGNORE_GLOBAL" ]]; then
+  touch "$GITIGNORE_GLOBAL"
+fi
+
+if [[ "$(git config --global core.excludesfile)" != "$GITIGNORE_GLOBAL" ]]; then
+  git config --global core.excludesfile "$GITIGNORE_GLOBAL"
+fi
+
+if ! grep -qx ".DS_Store" "$GITIGNORE_GLOBAL"; then
+  echo ".DS_Store" >> "$GITIGNORE_GLOBAL"
+fi
+
+# ──────────────────────────────
 # Aliases
 # ──────────────────────────────
 alias bat='bat --color=always --theme=base16 --style=plain'
