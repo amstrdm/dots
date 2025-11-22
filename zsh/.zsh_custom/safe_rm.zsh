@@ -39,13 +39,51 @@ safe_rm() {
     [[ -d "$t" ]] && has_dir=1
   done
 
-  # If there is a directory but NO -r/-R, behave like normal rm (no preview)
+  # Wenn Verzeichnisse, aber kein -r/-R: wie normales rm verhalten (kein eigener Kram)
   if (( has_dir && ! saw_recursive )); then
     command rm "$@"
     return $?
   fi
 
-  # From here on, we handle our "safe recursive/file delete" logic
+  # --- Entscheiden, ob "heavy mode" notwendig ist ---
+
+  local heavy_mode=0
+
+  if (( ${#targets} > 1 )); then
+    # Mehrere Ziele (Wildcards/Pattern etc.) => immer sichere Logik
+    heavy_mode=1
+  else
+    # Genau ein Ziel – prüfen, ob es ein NICHT-leeres Verzeichnis ist
+    t=${targets[1]}
+    if [[ -d "$t" && -e "$t" ]]; then
+      local -a tmp
+      tmp=("$t"/*)
+      if (( ${#tmp} > 0 )); then
+        # Single non-empty directory mit -r/-R => sichere Logik
+        heavy_mode=1
+      fi
+    fi
+  fi
+
+  # --- Einfache Bestätigung für: einzelne Datei oder leerer Ordner ---
+
+  if (( ! heavy_mode )); then
+    print "🗑 Target to delete: ${targets[1]}"
+    local confirm
+    print -n "Delete this item? [y/N] "
+    read -r confirm
+
+    if [[ ! "$confirm" =~ ^[yY]$ ]]; then
+      print "Aborted. Nothing deleted."
+      return 0
+    fi
+
+    command rm "$@"
+    return $?
+  fi
+
+  # --- Ab hier: "safe" Logik für non-empty dirs und mehrere Ziele (Patterns etc.) ---
+
   local -a confirmed_targets=()
   local use_tree=0
 
@@ -97,7 +135,6 @@ safe_rm() {
       # Directory preview
       if (( use_tree )); then
         print "📂 Directory preview:"
-        # adjust depth here if you want (current: 2)
         tree -L 2 -- "$t"
       else
         print "📂 Directory preview (using find):"
@@ -116,10 +153,15 @@ safe_rm() {
       entries=("$t"/*)
 
       if (( ${#entries} == 0 )); then
+        # Falls hier doch leer sein sollte, simple Bestätigung
         print "  (empty directory)"
-        branch_letters="OK"
-        print
-        print "To confirm deletion of '$t', type: $branch_letters"
+        local confirm_empty
+        print -n "Delete this (empty) directory? [y/N] "
+        read -r confirm_empty
+        if [[ ! "$confirm_empty" =~ ^[yY]$ ]]; then
+          print "❌ Not confirmed. Skipping '$t'."
+          continue
+        fi
       else
         for entry in "${entries[@]}"; do
           [[ -e "$entry" ]] || continue
@@ -135,22 +177,23 @@ safe_rm() {
         done
         print
         print "To confirm deletion of '$t', type the letters (in order, no spaces): $branch_letters"
-      fi
 
-      local confirm
-      read -r "confirm?> "
+        local confirm_dir
+        read -r "confirm_dir? "
 
-      if [[ "$confirm" != "$branch_letters" ]]; then
-        print "❌ Confirmation mismatch. Skipping '$t'."
-        continue
+        if [[ "$confirm_dir" != "$branch_letters" ]]; then
+          print "❌ Confirmation mismatch. Skipping '$t'."
+          continue
+        fi
       fi
 
     else
-      # Single file
+      # File im "heavy mode" (z.B. aus Wildcard/mehreren Targets)
       print "🗑 File to delete: $t"
-      local confirm
-      read -r "confirm?Type 'yes' to delete this file: "
-      if [[ "$confirm" != "yes" ]]; then
+      local confirm_file
+      print -n "Delete this file? [y/N] "
+      read -r confirm_file
+      if [[ ! "$confirm_file" =~ ^[yY]$ ]]; then
         print "❌ Not confirmed. Skipping '$t'."
         continue
       fi
@@ -172,7 +215,8 @@ safe_rm() {
   done
 
   local final
-  read -r "final?Final check – type 'delete' to proceed: "
+  print -n "Final check – type 'delete' to proceed: "
+  read -r final
   if [[ "$final" != "delete" ]]; then
     print "Aborted final step. Nothing deleted."
     return 0
