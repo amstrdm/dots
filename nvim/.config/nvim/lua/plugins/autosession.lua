@@ -8,5 +8,6 @@ return {
   opts = {
     suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
     -- log_level = 'debug',
+    cwd_change_handling = true,
   },
 }
