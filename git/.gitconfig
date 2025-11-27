@@ -1,3 +1,5 @@
 [user]
 	email = a.caserta@proton.me
 	name = amstrdm
+[core]
+	excludesfile = /Users/acaserta/.gitignore_global
