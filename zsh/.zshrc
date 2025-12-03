@@ -131,7 +131,6 @@ alias yz=yazi
 
 alias dplayout="$HOME/dplayout/display-layout-manager.sh"
 
-source ~/.zsh_custom/safe_rm.zsh
 # ──────────────────────────────
 # Package aliases
 # ──────────────────────────────
