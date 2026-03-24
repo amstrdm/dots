@@ -1,6 +1,7 @@
 return {
   "snacks.nvim",
   opts = {
+    terminal = { enabled = false },
     dashboard = {
       preset = {
         header = [[
