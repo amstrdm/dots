@@ -36,3 +36,6 @@ vim.keymap.set("n", "<leader>ut", function()
     vim.notify("BasedPyright (Types) Visible", vim.log.levels.INFO)
   end
 end, { desc = "Toggle Type Diagnostics" })
+
+-- Resume last telescope search
+vim.keymap.set("n", "<leader>sx", "<cmd>Telescope resume<cr>", { desc = "Resume last search" })

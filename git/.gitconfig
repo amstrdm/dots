@@ -2,4 +2,4 @@
 	email = a.caserta@proton.me
 	name = amstrdm
 [core]
-	excludesfile = $HOME/.gitignore_global
+	excludesfile = /Users/amstrdm/.gitignore_global
