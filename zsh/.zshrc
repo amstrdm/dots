@@ -129,6 +129,15 @@ alias hyprbar='waybar -c ~/.config/waybar/hyprland/config.jsonc'
 alias vim=nvim
 alias yz=yazi
 
+alias wb='west build'
+alias wbf='west build && west flash'
+
+function serial {
+  local port
+  port=$(ls /dev/cu.* 2>/dev/null | fzf)
+  [[ -n "$port" ]] && tio "$port"
+}
+
 alias dplayout="$HOME/dplayout/display-layout-manager.sh"
 
 # ──────────────────────────────
