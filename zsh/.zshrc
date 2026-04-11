@@ -188,4 +188,5 @@ if [[ -f ~/.zshrc.local ]]; then
 fi
 
 # Set up direnv
+export DIRENV_LOG_FORMAT=""
 eval "$(direnv hook zsh)"
