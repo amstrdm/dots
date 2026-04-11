@@ -9,7 +9,6 @@ return {
             "--clang-tidy",
             "--completion-style=detailed",
             "--header-insertion=never",
-            "--log=verbose",
             "--query-driver=**/arm-zephyr-eabi-g++",
             "--background-index",
           },
