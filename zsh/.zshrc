@@ -186,3 +186,6 @@ export NVM_DIR="$HOME/.nvm"
 if [[ -f ~/.zshrc.local ]]; then
   source ~/.zshrc.local
 fi
+
+# Set up direnv
+eval "$(direnv hook zsh)"
