@@ -107,3 +107,40 @@ rebuildMenu()
 if autoApplyEnabled then
 	autoApply()
 end
+
+hs.window.animationDuration = 0
+
+local function moveWindowToNextDisplayAndFullscreen()
+	local win = hs.window.focusedWindow()
+	if not win then
+		return
+	end
+
+	local wasFullscreen = win:isFullScreen()
+
+	-- Step 1: if already in true macOS fullscreen, leave fullscreen first
+	if wasFullscreen then
+		win:setFullScreen(false)
+		hs.timer.usleep(900000) -- wait 0.9 sec for macOS Space transition
+	end
+
+	-- Step 2: move to next display
+	win = hs.window.focusedWindow()
+	if not win then
+		return
+	end
+
+	local screen = win:screen()
+	local nextScreen = screen:next()
+
+	win:moveToScreen(nextScreen, false, true, 0)
+	hs.timer.usleep(300000)
+
+	-- Step 3: enter true macOS fullscreen
+	win = hs.window.focusedWindow()
+	if win then
+		win:setFullScreen(true)
+	end
+end
+
+hs.hotkey.bind({ "cmd", "ctrl", "alt" }, "Right", moveWindowToNextDisplayAndFullscreen)
