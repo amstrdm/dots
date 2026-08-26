@@ -1,12 +1,12 @@
 return {
-  {
-    "amstrdm/dutchpro",
-  },
-
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "dutchpro",
-    },
-  },
+  -- {
+  --   "amstrdm/dutchpro",
+  -- },
+  --
+  -- {
+  --   "LazyVim/LazyVim",
+  --   opts = {
+  --     colorscheme = "dutchpro",
+  --   },
+  -- },
 }
